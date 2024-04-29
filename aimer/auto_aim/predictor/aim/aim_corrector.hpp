@@ -186,5 +186,3 @@ private:
 } // namespace aimer::aim
 
 #endif /* AIMER_AUTO_AIM_PREDICTOR_AIM_AIM_CORRECTOR_HPP */
-
-#endif /* AIMER_AUTO_AIM_PREDICTOR_AIM_AIM_CORRECTOR_HPP */

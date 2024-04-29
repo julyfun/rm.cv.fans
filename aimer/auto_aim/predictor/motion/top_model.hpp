@@ -337,5 +337,3 @@ private:
 } // namespace aimer::top
 
 #endif /* AIMER_AUTO_AIM_PREDICTOR_MOTION_TOP_MODEL_HPP */
-
-#endif /* AIMER_AUTO_AIM_TOP_MODEL_HPP */
