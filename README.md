@@ -16,4 +16,6 @@
 
 `lmtd` is Linear Modelled Top Detector, see `aimer/auto_aim/predictor/motion/lmtd_top_model.cpp` for this.
 
+https://github.com/julyfun/assets/assets/43675484/2e8579c5-c233-410b-8f3e-c151fb9df543
+
 Explanation in: https://sjtu-robomaster-team.github.io/antitop/ and https://www.bilibili.com/video/BV1vX4y1W7U7
