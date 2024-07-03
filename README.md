@@ -18,4 +18,7 @@
 
 https://github.com/julyfun/assets/assets/43675484/2e8579c5-c233-410b-8f3e-c151fb9df543
 
-Explanation in: https://sjtu-robomaster-team.github.io/antitop/ and https://www.bilibili.com/video/BV1vX4y1W7U7
+Presentation PPT: https://sjtu-robomaster-team.github.io/antitop
+
+Video: https://www.bilibili.com/video/BV1vX4y1W7U7
+
