@@ -1,0 +1,7 @@
+#ifndef ULTRAMULTITHREAD_INCLUDE_UMT_UMT_HPP
+#define ULTRAMULTITHREAD_INCLUDE_UMT_UMT_HPP
+
+#include "Message.hpp"
+#include "ObjManager.hpp"
+
+#endif /* ULTRAMULTITHREAD_INCLUDE_UMT_UMT_HPP */
