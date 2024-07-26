@@ -20,7 +20,7 @@
 - 降低自由度获取比 pnp 精准得多的姿态 [aimer/auto_aim/predictor/motion/top_model.cpp](aimer/auto_aim/predictor/motion/top_model.cpp)
 - 弹道校正 [aimer/auto_aim/predictor/aim/aim_corrector.cpp](aimer/auto_aim/predictor/aim/aim_corrector.cpp)
 - 运行时热更新参数 [base/param/parameter.cpp](base/param/parameter.cpp)
-- 好用的 ekf [aimer/base/math/filter/adaptive_ekf.hpp](aimer/base/math/filter/adaptive_ekf.hpp)
+- 通用 EKF 滤波器 [aimer/base/math/filter/adaptive_ekf.hpp](aimer/base/math/filter/adaptive_ekf.hpp)
 - 手搓坐标变换和精准弹道估计 [aimer/base/robot/coord_converter.cpp](aimer/base/robot/coord_converter.cpp)
 
 https://github.com/julyfun/assets/assets/43675484/2e8579c5-c233-410b-8f3e-c151fb9df543
