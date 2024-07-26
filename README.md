@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://bun.sh"><img src="https://sjtu-robomaster-team.github.io/assets/img/logo.png" alt="Logo" height=170></a>
+  <a href="https://sjtu-robomaster-team.github.io/"><img src="https://sjtu-robomaster-team.github.io/assets/img/logo.png" alt="Logo" height=140></a>
 </p>
 <h1 align="center">Lmtd - Linear Modelled Top Detector</h1>
 
@@ -11,6 +11,8 @@
   <a href="https://github.com/julyfun/rm.cv.fans/issues/new">Issues</a>
   <br />
 </div>
+
+## What is Lmtd?
 
 手撸的通信，参数，UI，数学和坐标变换，兼容性一般但是非常快。
 
