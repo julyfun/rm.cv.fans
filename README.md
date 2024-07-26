@@ -18,6 +18,7 @@
 
 - 运动方程和精细火控 [aimer/auto_aim/predictor/motion/lmtd_top_model.cpp](aimer/auto_aim/predictor/motion/lmtd_top_model.cpp)
 - 降低自由度获取比 pnp 精准得多的姿态 [aimer/auto_aim/predictor/motion/top_model.cpp](aimer/auto_aim/predictor/motion/top_model.cpp)
+- 收敛快速的平移运动模型 [aimer/auto_aim/predictor/motion/armor_model.cpp](aimer/auto_aim/predictor/motion/armor_model.cpp)
 - 弹道校正 [aimer/auto_aim/predictor/aim/aim_corrector.cpp](aimer/auto_aim/predictor/aim/aim_corrector.cpp)
 - 运行时热更新参数 [base/param/parameter.cpp](base/param/parameter.cpp)
 - 通用 EKF 滤波器 [aimer/base/math/filter/adaptive_ekf.hpp](aimer/base/math/filter/adaptive_ekf.hpp)
