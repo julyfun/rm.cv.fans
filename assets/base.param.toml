@@ -1,0 +1,281 @@
+# 本参数表角度均为角度制，物理量为国际单位。
+# 在 vim 中搜索：通过命令 "/xxx + 回车 + n"
+# 本文件严格区分参数的数据类型，比如 10.0 不能改成 10
+
+# --- 机械物理量 ---
+# @brief 子弹半径
+[launching-mechanism]
+# @brief 相机坐标系下，相机到枪口的 x。向右为正，用于校正相机与枪口
+camera-to-barrel-x = 0.0
+# @brief 相机坐标系下，相机到枪口的 y。向下为正，用于校正相机与枪口
+camera-to-barrel-y = -0.055
+
+    [launching-mechanism.bullet]
+    radius = 0.0085
+    mass = 0.041
+    # @brief 子弹迎风面积，用于弹道解算
+    frontal-area = 0.0013854423366
+    # @brief 子弹空气阻力系数 K = 0.5CρV / m
+    resistance-k = 0.022928514188
+
+[ec]
+using-angle-compensate = false
+# protocol.version = "std-23.04.12"
+
+[auto-aim.cmd]
+# @brief 是否给电控发送 yaw pitch 的速度
+send-yaw-v = false
+# @brief 发送给电控的 yaw pitch 速度是否是弧度制
+yaw-v-is-radian = true
+# @brief 根据角速度，给电控指令的额外预测时间
+# @param +: 调大将使对运动靶的跟踪更超前
+additional-predict-time = 0.060
+
+[auto-aim.predict]
+# @brief 预测迭代次数
+num-iterations = 2
+
+[auto-aim.latency]
+# @brief 信号传输总延迟（测量值）
+# @param +: 调大将使对运动靶的跟踪更超前
+send-to-control = -18e-3
+# @brief 控制到开火的延迟（测量值）
+# @param +: 调大将提早反陀螺模型的打击
+control-to-fire = 20e-3
+
+[auto-aim.aim-offset]
+# @brief 打击方向 yaw 补偿
+# @param +: 调大将向左打击
+yaw = 0.0
+# @brief 打击方向 pitch 补偿
+# @param +: 调大将向上打击
+pitch = 0.0
+
+[auto-aim.pnp]
+# @brief 补偿 pnp 测距 d 为 d + a2 * d * d
+distance-fixer.a2 = 0.0
+
+# --- 对局信息 ---
+[auto-aim.ignore-enemy]
+# @brief 忽略标号为以下的敌人
+list = [100]
+
+[auto-aim.enemy-state]
+# @brief 是否开启手动设置平衡步兵。若关闭则会尝试自动识别平衡
+manually-set-balance-infantry = true
+# @brief 手动设置 3 号敌人是否为平衡步兵。需开启上一选项
+infantry3-is-balance = false
+infantry4-is-balance = false
+infantry5-is-balance = false
+
+# @brief 超过该距离的新出现的装甲板会被抛弃
+# @detail 防止远处的灯光组成装甲板状物被识别
+new-armor-max-valid-distance = 10.0
+
+[auto-aim.balance-judger]
+# @brief 平衡识别机从 1. 置信度下降到 0.5 置信度所需时间
+balance-confidence-ramp-time = 15.0
+# @brief 平衡识别机从 0. 置信度上升到 0.5 置信度所需时间
+# @details 上升到 0.5 以上置信度，将认为是四板车。初始置信度一般为 0.
+non-balance-confidence-ramp-time = 0.2
+
+[auto-aim.outpost-fixer]
+z-that-distinguishes-two-types = 0.16
+active-lasting-time = 0.59233333
+
+[auto-aim.enemy-model]
+# @brief 最大同时更新的敌人的数目
+max-num-updated = 2
+# @brief 允许打击步兵的最大偏差率
+infantry.aim.max-error = 2.0
+
+# @brief 前哨站反陀螺是否开启朝向角修正器
+# @details 若打击陀螺前哨站时保证自身静止，则开启该项
+outpost.top-orientation-fixer.enabled = false
+
+# @brief 打击哨兵是否开启守株待兔模式
+old-sentry.passive-mode.enabled = false
+# @brief 打击哨兵的最大允许偏差率
+old-sentry.aim.max-error = 3.0
+
+[auto-aim.motion]
+# @option: "lmtd"
+# @option: "two-models"
+use-model = "two-models"
+
+[auto-aim.armor-model]
+# @brief 对同一敌人，小于最大装甲板面积乘以该值的装甲板
+# 将不会作为瞄准目标
+target-area-ratio = 0.6
+# @brief ekf 采纳的预测位置先验方差
+# @param +: 调大该值，加快位移追踪，但加剧抖动
+ekf.q.x = 0.01
+# @brief ekf 采纳的预测速度先验方差
+# @param +: 调大该值，加快速度追踪，但加剧抖动
+ekf.q.v = 100.0
+# @brief ekf 采纳的观测 yaw 先验方差
+# @param -: 调小该值，加快 yaw 追踪，但加剧抖动
+ekf.r.yaw = 1.0
+# @brief ekf 采纳的观测 pitch 先验方差
+# @param -: 调小该值，加快 pitch 追踪，但加剧抖动
+ekf.r.pitch = 1.5
+# @brief ekf 在 1m 处采纳的观测 distance 先验方差，与距离的平方成正比
+# @param -: 调小该值，加快抬头补偿追踪，但加剧抖动
+ekf.r.distance-at-1m = 50.0
+
+    # 111
+    [auto-aim.armor-model.passive-mode]
+    # @brief 守株待兔模式打击的最大装甲板偏差倍率
+    # @param +: 调大该值，将增加守株待兔模式的发射区间
+    aim.max-error = 0.5
+    # @brief 守株待兔模式跟随的最大装甲板偏差倍率
+    # @param +: 调大该值，将增加守株待兔模式的跟随区间
+    aim.tracking-range = 1.0
+
+# 自瞄.陀螺模型
+[auto-aim.top-model]
+# @brief 激活反陀螺所需最小角速度。激活还需旋转若干装甲板，
+# 单位: 度 / 秒
+active-w = 120.0
+# @brief 维持反陀螺所需最小角速度
+inactive-w = 100.0
+# @brief 角度 kalman 滤波对单板求角采纳的先验方差
+# @param -: 调小该值，加快角度追踪，但加剧角度估计抖动
+single-angle-r = 110.0
+# @brief 角度 kalman 滤波对双板求角采纳的先验方差
+# @param -: 调小该值，加快角度追踪，但加剧角度估计抖动
+double-angle-r = 50.0
+# @brief 全车模型对 1m 处观测半径采纳的先验方差，其与距离平方成正比
+ab.length.r-at-1m = 1_500.0
+ab.length.max = 0.30
+ab.length.min = 0.19
+# @brief 全车模型对 1m 处观测高度采纳的先验方差，其与距离平方成正比
+ab.z.r-at-1m = 400.0
+ab.z.abs-max = 0.05
+
+# @brief 陀螺中心 kalman 在 1m 处采纳的位置先验方差
+# @param +: 调大该值，加快陀螺中心追踪，但加剧中心估计抖动
+center-r-at-1m = 16.0
+# @brief 陀螺观测半径所需双板最小比例
+# @param -: 调小该值，测半径的时间区间增加，但观测值平均误差增大
+radius-sampling-area-ratio = 0.6
+outpost.center-update-max-angle = 10.0
+# @brief 陀螺打击落点限制的敌人角度
+# @param +: 调大该值，加大允许打击的角度区间，提高平均射频但降低期望命中率
+aim.max-orientation-angle = 30.0
+# @brief 陀螺打击允许的当前枪口 - 命中枪口的最大偏差
+# @param +: 调大该值，加大允许打击的发射区间
+aim.max-swing-error = 3.0
+# @brief 陀螺打击允许的装甲板在极限角的出现位置 - 装甲板实际位置的最大偏差
+# @param +: 调大该值，在极限角等待时允许打击的发射区间
+aim.max-out-error = 0.8
+    # --- - 4 板全车模型 ---
+    # @brief 4 板陀螺模型激活所需的装甲板切换数目
+    [auto-aim.top-model.top4]
+    active-rotate = 1
+
+[auto-aim.lmtd-top-model]
+q.pos.x.in-1s = 2.8
+q.pos.v.in-1s = 2800.0
+q.orientation-yaw.x.in-1s = 2.8
+q.orientation-yaw.v.in-1s = 280.0
+q.r = 1.0
+r.yaw = 8.0
+r.pitch = 8.0
+r.dis.at-1m = 25.888888
+# r.x.at-1m = 5.0
+r.orientation-yaw.single = 30.0
+r.orientation-yaw.double = 15.0
+credit-dt = 1.0
+# @details Model 会尽量追踪同一 id 的装甲板，但这块装甲板的面积必须占最大装甲板面积
+# 的该比例以上才会继续追踪，否则会追踪最大面积的装甲板
+keep-tracking-area-ratio = 0.9
+
+    [auto-aim.lmtd-top-model.fix]
+    radius.max = 0.30
+    radius.min = 0.19
+    dz.abs-max = 0.10
+    you-are-sure-that-the-outpost-will-not-move-in-a-continuous-observation = true
+    no-z-axis-motion = true
+
+    [auto-aim.lmtd-top-model.aim]
+    # top0 时若没有 direct 则 idle，不会去选 indirect
+    top0.max-orientation-angle.armors-4 = 58.8888
+    top0.max-orientation-angle.armors-other = 75.0
+    top0.max-out-error = 1.8
+
+    top1.activate-w = 90.0
+    top1.deactivate-w = 60.0
+    top1.max-orientation-angle = 0.0
+    top1.max-out-error = 0.6
+
+    top2.activate-w = 500.0
+    top2.deactivate-w = 450.0
+    top2.max-orientation-angle = 0.0
+    top2.max-out-error = 1.8
+
+    # 用一条直线 ax + b 描述 yaw 电机转动时间和阶跃转动角的关系
+    angle-to-rotate-time.a = 1.79e-3
+    angle-to-rotate-time.b = 0.093
+
+    max-tracking-error = 2.0
+
+[auto-aim.aim-corrector]
+sample.enabled = false
+correction.enabled = false
+error.r = 1.0
+
+[auto-aim.ec-simulator]
+enabled = true
+shoot-interval = 0.02
+
+[auto-aim.debug.periodic-monitor]
+period = 0.5
+
+[auto-aim.debug.flask]
+map.pixel-per-meter = 100.0
+plane.show = false
+plane.z = -1.0
+cube.show = false
+cube.z = 0.0
+cube.dis = 3.0
+plumbing = true
+
+[calibrate]
+chessboard-width = 11
+chessboard-height = 8
+chessboard-cell-size-cm = 2.0
+
+[file-io]
+fps = 10.0
+
+[core-io.cmd-debugger]
+enabled = false
+car-id.enabled = false
+car-id.value = 0
+detection-info.enabled = false
+detection-info.value = 0
+yaw.enabled = false
+yaw.value = 0.0
+pitch.enabled = false
+pitch.value = 0.0
+dist.enabled = false
+dist.value = 0.0
+shoot.enabled = false
+shoot.value = 0
+
+[core-io.status-debugger]
+enabled = false
+bullet-speed.enabled = true
+bullet-speed.value = 28.0
+enemy-color.enabled = true
+enemy-color.value = 1
+last-shoot-aim-id.enabled = false
+last-shoot-aim-id.value = 75
+
+[hero-lob]
+restart = false
+start-status = 1
+yaw-offset = 0.0
+average-bullet-speed = 16.3
+bullet-alpha = 0.6
