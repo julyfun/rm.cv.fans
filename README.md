@@ -16,14 +16,14 @@
 
 手搓通信，参数，UI，数学和坐标变换，兼容性一般，但是非常快。
 
-- 降低自由度计算装甲板 Rotation，比 PnP 精准得多 [aimer/auto_aim/predictor/motion/top_model.cpp](aimer/auto_aim/predictor/motion/top_model.cpp)
-- 精打细算的延迟匹配，使你的追踪打击无比丝滑 [docs/auto_aim/latency.md]
-- 运动方程 & 精细火力控制 [aimer/auto_aim/predictor/motion/lmtd_top_model.cpp](aimer/auto_aim/predictor/motion/lmtd_top_model.cpp)
-- 平移运动模型，收敛快速 [aimer/auto_aim/predictor/motion/armor_model.cpp](aimer/auto_aim/predictor/motion/armor_model.cpp)
-- Runtime 热更新参数 [base/param/parameter.cpp](base/param/parameter.cpp)
-- 精准弹道解算 [aimer/base/robot/coord_converter.cpp](aimer/base/robot/coord_converter.cpp)
-- 通用 EKF 类 [aimer/base/math/filter/adaptive_ekf.hpp](aimer/base/math/filter/adaptive_ekf.hpp)
-- 弹道校正 [aimer/auto_aim/predictor/aim/aim_corrector.cpp](aimer/auto_aim/predictor/aim/aim_corrector.cpp)
+- LMTD 运动方程，"Water-gun" 火力控制，每一段延迟都精细考虑 [lmtd_top_model.cpp](aimer/auto_aim/predictor/motion/lmtd_top_model.cpp)
+- 降低自由度计算装甲板 Rotation，相比 PnP 精度显著提升 [top_model.cpp](aimer/auto_aim/predictor/motion/top_model.cpp)
+- 精打细算的延迟匹配文档 [latency.md](docs/auto_aim/latency.md)
+- 平移运动模型，收敛快速 [armor_model.cpp](aimer/auto_aim/predictor/motion/armor_model.cpp)
+- Runtime 热更新的参数表 [parameter.cpp](base/param/parameter.cpp)
+- 精准弹道解算 [coord_converter.cpp](aimer/base/robot/coord_converter.cpp)
+- 自主弹道校正 [aim_corrector.cpp](aimer/auto_aim/predictor/aim/aim_corrector.cpp)
+- 通用 EKF 类 [adaptive_ekf.hpp](aimer/base/math/filter/adaptive_ekf.hpp)
 
 https://github.com/julyfun/assets/assets/43675484/2e8579c5-c233-410b-8f3e-c151fb9df543
 
