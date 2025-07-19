@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://sjtu-robomaster-team.github.io/"><img src="https://sjtu-robomaster-team.github.io/assets/img/logo.png" alt="Logo" height=140></a>
 </p>
-<h1 align="center">Lmtd - Linear Modelled Top Detector</h1>
+<h1 align="center">LMTD - Linear Modelled Top Detector</h1>
 
 <div align="center">
   <a href="https://sjtu-robomaster-team.github.io/antitop/">汇报</a>
@@ -12,7 +12,7 @@
   <br />
 </div>
 
-## What is Lmtd?
+## What is LMTD?
 
 手搓通信，参数，UI，数学和坐标变换，兼容性一般，但是非常快。
 
